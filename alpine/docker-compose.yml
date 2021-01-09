@@ -11,7 +11,7 @@ services:
       - "mysql"
       - "rabbitmq"
     volumes:
-      - persistent_assets:/storage
+      #- persistent_assets:/storage
       - static_assets:/opt/postal/public
       - postal_assets:/opt/postal/public/assets
       - ./src/templates/:/templates
@@ -49,7 +49,7 @@ services:
     image: nginx
     container_name: postal_nginx
     ports:
-      - 80:80
+      - 5000:80
     links:
       - postal
     depends_on:

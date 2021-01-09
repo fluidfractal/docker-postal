@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.3
 
 ENV DOCKERIZE_VERSION v0.6.1
 
