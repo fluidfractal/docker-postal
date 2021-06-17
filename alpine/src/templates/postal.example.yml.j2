@@ -1,11 +1,6 @@
-web_server:
-  bind_address: 0.0.0.0
-  port: 5000
-  max_threads: 5
-
 web:
   # The host that the management interface will be available on
-  host: postal.example.com
+  host: {{ POSTAL_HOST }}
   # The protocol that requests to the management interface should happen on
   protocol: https
 
@@ -46,21 +41,52 @@ dns:
   # https://github.com/atech/postal/wiki/Domains-&-DNS-Configuration for further
   # information about these.
   mx_records:
-    - mx.postal.example.com
-  smtp_server_hostname: postal.example.com
-  spf_include: spf.postal.example.com
-  return_path: rp.postal.example.com
-  route_domain: routes.postal.example.com
-  track_domain: track.postal.example.com
+    - {{ POSTAL_MX }}
+  smtp_server_hostname: {{ POSTAL_SMTP_HOST }}
+  spf_include: {{ POSTAL_SPF_INCLUDE }}
+  return_path: {{ POSTAL_RETURN_PATH }}
+  route_domain: {{ POSTAL_ROUTE_DOMAIN }}
+  track_domain: {{ POSTAL_TRACK_DOMAIN }}
 
 smtp:
   # Specify an SMTP server that can be used to send messages from the Postal management
   # system to users. You can configure this to use a Postal mail server once the
   # your installation has been set up.
   host: 127.0.0.1
-  port: 2525
+  port: {{ POSTAL_SMTP_PORT }}
   username: # Complete when Postal is running and you can
   password: # generate the credentials within the interface.
   from_name: Postal
-  from_address: postal@yourdomain.com
+  from_address: {{ POSTAL_SMTP_FROM_ADDR }}
 
+smtp_server:
+  port: {{ POSTAL_SMTP_PORT }}
+  tls_enabled: {{ POSTAL_SMTP_TLS_ENABLED }}
+  tls_certificate_path: {{ POSTAL_SMTP_TLS_CERT }}
+  tls_private_key_path: {{ POSTAL_SMTP_TLS_KEY }}
+  tls_ciphers:
+  ssl_version: SSLv23
+  proxy_protocol: false
+  log_connect: true
+  strip_received_headers: false
+  max_message_size: 50 # size in Megabytes
+
+smtp_relays:
+  -
+    hostname:
+    port: {{ POSTAL_SMTP_PORT }}
+    ssl_mode: Auto
+
+workers:
+  quantity: 1
+  threads: 4
+
+rails:
+  # This is generated automatically by the config initialization. It should be a random
+  # string unique to your installation.
+  secret_key: {{secretkey}}
+
+web_server:
+  bind_address: 0.0.0.0
+  port: 5000
+  max_threads: 5

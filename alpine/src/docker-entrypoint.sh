@@ -22,11 +22,14 @@ elif [ ! -f /opt/postal/config/postal.yml ] || [[ $(cat /opt/postal/config/posta
   ## Generate config and keys
   /opt/postal/bin/postal initialize-config
   /opt/postal/bin/postal initialize
+  sleep 1
   /create-user.sh
   ## Copy over config to persistent storage
   cp -p /opt/postal/config/postal.yml /storage/postal.yml
   rm /opt/postal/config/postal.yml
   ln -s /storage/postal.yml /opt/postal/config/postal.yml
+  ## Copy certs
+  mkdir /certs
 fi
 echo "fast_server.cert"
 if [ -f /storage/fast_server.cert ]; then

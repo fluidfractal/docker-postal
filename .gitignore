@@ -5,3 +5,5 @@ ubuntu/data/*
 !ubuntu/data/.gitkeep
 !ubuntu/data/postal/.gitkeep
 
+*.swp
+
