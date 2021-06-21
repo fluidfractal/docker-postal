@@ -5,7 +5,7 @@ services:
     container_name: postal
     command: run
     ports:
-      - 2525:2525
+      - "25:25"
       - 5000:5000
     labels:
       - traefik.enable=true
@@ -35,7 +35,7 @@ services:
       - POSTAL_HOST=postal.example.com
       - POSTAL_SMTP_HOST=postal.example.com
       - POSTAL_SMTP_FROM_ADDR=noreply@example.com
-      - POSTAL_SMTP_PORT=2525
+      - POSTAL_SMTP_PORT=25
       - POSTAL_SMTP_TLS_ENABLED=true
       - POSTAL_SMTP_TLS_CERT=/certs/smtp.cert
       - POSTAL_SMTP_TLS_KEY=/certs/smtp.key
