@@ -14,7 +14,7 @@ services:
       - traefik.port=5000
       - traefik.protocol=http
       - traefik.docker.network=proxy
-      - traefik.backend=postal-app
+      - traefik.backend=postal
     depends_on:
       - "mysql"
       - "rabbitmq"
